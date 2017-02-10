@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Civet.Server
@@ -11,6 +12,8 @@ namespace Civet.Server
     {
         public static void Main(string[] args)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            Console.WriteLine("Server端启动");
             //创建一个socket对象,三个参数分别代表：
             //AddressFamily.InterNetwork: IPV4协议，SocketType.Stream：流类型，ProtocolType.Tcp:TCP方式连接
             Socket ss = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -52,7 +55,7 @@ namespace Civet.Server
                     //之前最坑的是当时不知道在C#下如何转，在网上看到了一个用BigEndianUnicode编码的，
                     //当时没有想太多就使了，结果就是解出来各种乱码的样子，这块跟大伙提一下
                     sMsg = System.Text.Encoding.UTF8.GetString(bMessage);
-                    Console.WriteLine("Client(" + DateTime.Now.ToFileTimeUtc() + "):" + sMsg);
+                    Console.WriteLine("Client(" + DateTime.Now.ToString() + "):" + sMsg);
                     //接下来就是输入一个字符串，并把其转成byte数组，然后Send出去。
                     //bMessage = System.Text.Encoding.UTF8.GetBytes(Console.ReadLine().ToCharArray());
                     //s.Send(bMessage);

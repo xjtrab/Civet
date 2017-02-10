@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Civet.Client
@@ -11,6 +12,8 @@ namespace Civet.Client
     {
         public static void Main(string[] args)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            Console.WriteLine("Client端启动");
             //同服务器端一样，需要创建一个socket
             Socket ss = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             //这块主要就是把你想连接的目标主机IP地址进行一下解析，并存入IPAddress类型的一个实例当中
